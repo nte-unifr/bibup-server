@@ -3,8 +3,8 @@
 //VARIABLES DE CONNEXION1
 
 $db_host = "127.0.0.1";
-$db_login = "root";
-$db_password = "";
+$db_login = "bibup_user";
+$db_password = "***REMOVED***";
 $db_database = "bibup";
 
 $bibup_faq = "faq";
