@@ -1,0 +1,17 @@
+<html>
+<head>
+  <title>Administration - chargement d'un fichier</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+<body>
+<h1>Chargement d'un fichier</h1>
+<form enctype="multipart/form-data" action="addfiche.php" method="post">
+  ISBN : <input type="text" name="isbn" /> Note :
+  <input type="text" name="note" />   Tag: <input type="text" name="tag" /><br />
+<br />
+  <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
+  Upload this file: <input name="contentSnapshot" type="file">
+  <input name="titleSnapshot" type="file">
+  <input type="submit" value="Envoyer le fichier">
+</form>
+</body>
+</html>

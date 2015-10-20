@@ -1,0 +1,17 @@
+.cur-pointer { cursor: pointer; }
+
+.toggleMe { display: none; }
+
+.thumb-max {
+        max-width: 240px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+}
+
+.app-icon {
+        max-width: 120px;
+        margin-bottom: 10px;
+}
+.store-brand { margin: 10px; }
+.spacer { height: 40px; }

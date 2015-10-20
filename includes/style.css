@@ -1,0 +1,153 @@
+.tag {
+     background-color: #FAFFBD;
+}
+
+.sideBox {
+  background-color: #E4EDF2;
+  border-color: #E4EDF2;
+  border-style: solid;
+  border-width: 1px;
+  float: right;
+  padding: .5em;
+  margin-top: -42px;
+  margin-left: 8px;
+  margin-bottom: 8px;
+  margin-right: -2px;
+  width: 30em;
+}
+/* Sortable tables */
+table.sortable
+{
+	border-collapse:collapse;
+}
+table.sortable thead {
+	background-color:#ccc;
+	font-weight: bold;
+	cursor: pointer;
+}
+table.sortable thead .sorttable_nosort{
+	cursor: default;
+}
+table.sortable td {
+	vertical-align:top;
+	border:1px solid #c3c3c3;
+	border-collapse:collapse;
+}
+table.sortable td
+{
+	border:1px solid #c3c3c3;
+	padding:3px;
+	vertical-align:top;
+}
+
+#main {
+	background-image: url(../images/general/background_main.gif);
+}
+#bandeau {
+	position:relative;
+	background-image: url(http://unifr.ch/images/crpr/unifr.png);
+	background-repeat: no-repeat;
+	margin-left: 200px;
+	padding: 0px;
+	height: 60px; }
+
+
+.form{
+	color: Black;
+	font-size: 12px;
+	font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular;
+	text-decoration: none;
+	background-color: #f5f5f5;
+	padding: 2px;
+	border: outset 1px #808080
+}
+
+.ficheTable{
+	width: 100%;
+	margin-top: 20px;
+	border: 1px solid #efefef;
+}
+
+.ficheTitle{
+	font-weight: bold;
+	color: #006699;
+	background-color: #F0F6F9;
+}
+
+.ficheSubtitle{
+	margin-top: 10px;
+	color: #444444;
+	font-weight: bold;
+}
+
+.ficheText{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	color: #000000;
+}
+
+#navigBarre a{
+	display:block;
+	font-weight: normal;
+	padding-right: 7px;
+	padding-left: 7px;
+	line-height: 21px;
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: #006699;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FFFFFF; }
+#navigBarre a:hover{ background-color: #E4EDF2; color: #006699; } 
+
+
+#nbLeft a {
+	font-weight: normal;
+	padding-left: 5px;
+	padding-right: 5px;
+	line-height: 15px;
+	border-bottom-width: 0px; 
+	display:block;
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: #006699;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FFFFFF;  }
+
+#nbLeft a:hover{ background-color: #E4EDF2; color: #006699; } 
+
+
+#nbRight a{
+	display:block;
+	font-weight: normal;
+	padding-right: 7px;
+	padding-left: 7px;
+	line-height: 21px;
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: #006699;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FFFFFF; }
+	
+#nbRight a:hover{ background-color: #E4EDF2; color: #006699; } 
+
+a {
+    text-decoration: underline;
+    font-weight: normal;
+    color: #006699;
+}
+a:link, a:visited {
+	text-decoration: underline;
+	color: #333333;	}
+a:hover, a:active {
+	text-decoration: underline;
+	color: #006699;	}
+    
+.box001_content a:link, .box001_content a:visited { text-decoration: underline; color: #333333; }
+.box001_content a:hover { text-decoration: underline; color: #006699; }
+    
+
+
+

@@ -1,0 +1,166 @@
+body{
+	font-size: 12px; 
+	font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular; 
+}
+
+.ficheTable{
+	width: 100%;
+	margin-top: 20px;
+	border: 1px solid #efefef;
+}
+
+.ficheTitle{
+	font-weight: bold;
+	color: #006699;
+	background-color: #F0F6F9;
+}
+
+.ficheSubtitle{
+	margin-top: 10px;
+	color: #444444;
+	font-weight: bold;
+}
+
+.ficheText{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	color: #000000;
+}
+
+.editForm{
+	font-size: 12px; 
+	width:100%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+
+.resultEntry{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	color: #000000;
+	text-align:justify;
+}
+
+.browsingButton{
+	padding: 5px;
+	width: 33%;
+	background-color: #ffffff;
+	border: solid 3px #ffffff;
+}
+
+.browsingButton:hover{
+	background-color: #f2f2f2;
+}
+
+.browsingButtonSelected{
+	padding: 5px;
+	border-top: dotted 3px #e4e6e6;
+	border-left: dotted 3px #e4e6e6;
+	border-right: dotted 3px #e4e6e6;
+}
+
+.searchFrame{
+	margin :0px 0px 0px 0px;
+	border-bottom: dotted 3px #e4e6e6;
+	border-left: dotted 3px #e4e6e6;
+}
+
+.searchByLabel{
+	padding-top: 30px;
+	font-weight: bold;
+}
+
+.searchBySecondLevelLabel{
+	padding-top: 10px;
+}
+
+.hiddenLink{
+	padding: 10px 5px 10px 25px;
+	text-decoration:none;
+}
+
+.searchBox{
+	width: 300px;
+}
+
+.searchBoxImage{
+	width: 80px;
+	height:72px;
+	float:left;
+}
+
+.searchButton{
+	margin-left: 20px;
+	width: 60px;
+}
+
+
+#bandeau {
+	position:relative;
+	background-image: url(http://unifr.ch/images/crpr/unifr.png);
+	background-repeat: no-repeat;
+	margin-left: 200px;
+	padding: 0px;
+	height: 60px; }
+	
+	
+.form{ 
+	color: Black; 
+	/*font-size: 12px; */
+	font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular; 
+	text-decoration: none; 
+	background-color: #f5f5f5; 
+	padding: 2px; 
+	border: outset 1px #8d8d8d;
+}
+
+select:focus {
+    width: auto;
+    position: relative;
+}
+
+.disabledForm{
+	/*font-size: 12px; */
+	font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular; 
+	text-decoration: none; 
+	padding: 2px; 
+	border: outset 1px #ffffff ;
+}
+
+.separator{
+	color: Black; 
+	padding: 5px; 
+	/*font-size: 12px; */
+	text-decoration: none; 
+	font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular; 
+	/*border-bottom: solid 1px black;*/
+}
+
+.searchMenu{
+	background-color:#ebebeb;
+	padding: 2px 2px 2px 2px;
+	border: outset 1px #ffffff ;
+}
+
+.searchMenu:hover{
+	background-color:#ebebff;
+}
+
+.buttonImage{
+	opacity: 1;
+
+}
+
+.buttonImage:hover{
+	opacity: .5;
+	zoom:1;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity = 50);
+	cursor: pointer;
+}
+
+
+
+

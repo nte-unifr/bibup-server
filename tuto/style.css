@@ -1,0 +1,32 @@
+
+/* Slide Demo CSS */
+
+/*body { background-color: #E5EDf3 ;height: 100%; width: 100%; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; }*/
+body { background-color: #ffffff ;height: 100%; width: 100%; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; }
+
+
+a { text-decoration: underline;font-weight: normal;color: #006699; }
+
+p { font-size: 12px; margin: 0 0 10px; }
+
+ul li { font-size: 12px; }
+
+#container { width: 800px; margin: 0 auto; }
+
+#title { width: 380px; margin: 0 auto }
+
+#title h1 { text-align:center; width: 580px; background-color: #006699; color: #FFFFFF; font-size: 40px; font-style: italic; text-shadow: 1px 1px 1px #999999; margin: 30px 0 10px; }
+
+#title p { font-size: 16px; color:#333;  }
+
+/* the CSS you want is below */
+
+.teamMember { background: #f6f6f6; border: 1px solid #CCC; padding:10px; margin: 0 auto 10px; overflow: hidden; width: 580px; }
+
+.teamMember img { float: left; padding: 0; margin: 10px; border: 1px solid #000; }
+
+.teamMemberRight { float: right; width: 425px; }
+
+.teamMemberRight h3 { margin: 10px 0 5px; }
+
+.toggleMe { display: none; } /* makes sure you don't see it while loading page */
