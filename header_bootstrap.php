@@ -86,13 +86,13 @@
 										$m4 = 'class="active"';
 									}
 								?>
-                                <li <? echo $m1 ?>><a href="index.php">References</a></li>
-                                <li <? echo $m2 ?>><a href="tutorial.php">Tutorial</a></li>
-                                <li <? echo $m3 ?>><a href="faq.php">FAQ</a></li>
+                                <li <?php echo $m1 ?>><a href="index.php">References</a></li>
+                                <li <?php echo $m2 ?>><a href="tutorial.php">Tutorial</a></li>
+                                <li <?php echo $m3 ?>><a href="faq.php">FAQ</a></li>
                                 <li><a href="https://www.unifr.ch/survey/start/index.php?sid=95831&lang=en" target="_blank">Feedback</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-								<li <? echo $m4 ?>><a href="contact.php">Contact</a></li>
+								<li <?php echo $m4 ?>><a href="contact.php">Contact</a></li>
                             </ul>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
