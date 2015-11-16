@@ -1,4 +1,4 @@
-<?
+<?php
 //On démarre la session
 session_name('prio2010_Beta');
 session_start();
