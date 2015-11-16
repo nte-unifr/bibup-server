@@ -19,7 +19,7 @@ include("header_bootstrap.php");
 						<label for="username">Username </label>
 						<input type="text" class="form-control" id="username" name="username" size="25" />
 						<label for="password">Password </label>
-						<input type="text" class="form-control" id="password" name="password" size="25" />
+						<input type="password" class="form-control" id="password" name="password" size="25" />
 					</div>
 					<button type="submit" name="submit" value="Login" class="btn btn-primary">Login</button>
 				</form>
