@@ -12,6 +12,15 @@
 	<div class="col-xs-12">
 		<div class="page-header">
 			<h1>FAQ - Frequently asked questions</h1>
+            <form action="modifier_faq.php" method="POST">
+    			<?php
+    				if(isset($_SESSION['password'])){
+    			?>
+                    <button type="submit" class="btn btn-info">Modify</button>
+    			<?php
+    				}
+    			?>
+    		</form>
 		</div>
 
         <?php

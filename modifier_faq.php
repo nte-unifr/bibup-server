@@ -2,7 +2,7 @@
 	session_name('prio2010_Beta');
 	session_start();
 	include("includes/fonctions.inc");
-	include("header.php");
+	include("header_bootstrap.php");
 	$query = "SELECT * FROM $bibup_faq";
 	$result = mysql_query($query);
 
@@ -25,131 +25,95 @@
 
 	if(!isset($_SESSION['password'])){
 ?>
-	<div id="content" align="center">
-		<table border="0" cellpadding="0" cellspacing="15" width="550">
-			<tbody>
-				<tr>
-					<td align="left" valign="top">
-						<!-- PARAGRAPH -->
-						<p align="justify"><br>
-							<table border="0" cellpadding="2" cellspacing="0" width="100%">
-								<tbody>
-									<tr>
-										<td valign="top">
-											<h5>Private access</h5>
-											<p>Le contenu de cette zone est "privé" et ne peut être accédé que par les personnes ayant droits exceptés.</p>
-											<p>Les noms d'utilisateurs et mots de passe ne doivent en aucun cas être redistribués à autrui. En cas de problèmes, n'hésitez pas à contacter l'<a href="mailto:francois.jimenez@unifr.ch">administrateur</a>.</p>
-											<br><br><br><br><br><br>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</p>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="page-header">
+			<h1>FAQ - Edition</h1>
+		</div>
+		<div class="row">
+			<div class="col-xs-5">
+				<div class="alert alert-warning" role="alert">
+					<h3>Private access</h3>
+					<p>Le contenu de cette zone est "privÃ©" et ne peut Ãªtre accÃ©dÃ© que par les personnes ayant droits exceptÃ©s.</p>
+					<p>Les noms d'utilisateurs et mots de passe ne doivent en aucun cas Ãªtre redistribuÃ©s Ã  autrui. En cas de problÃ¨mes, n'hÃ©sitez pas Ã  contacter l'<a href="mailto:nte@unifr.ch">administrateur</a>.</p>
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
+
 <?php
 	}else{
 ?>
-	<!-- start:colonneRight -->
-	<div id="content">
+
+<div class="row">
+	<div class="col-xs-12">
+		<div class="page-header">
+			<h1>FAQ - Edition</h1>
+		</div>
 		<script type="text/javascript">
 			function deleteTopic(id){
 				var topic = document.getElementById(id);
-				topic.parentNode.removeChild(topic);
-				var elements = document.getElementById('topicList').getElementsByTagName('tr');
+				// topic.parentNode.removeChild(topic);
+				topic.remove();
+				var elements = document.getElementById('topicList').getElementsByClassName('entry');
 				if (elements.length == 0)
 					createTopic();
 			}
 
 			function createTopic(){
-				var elements = document.getElementById('topicList').getElementsByTagName('tr');
+				var elements = document.getElementById('topicList').getElementsByClassName('entry');
 				var id = 1;
 				if (elements.length > 0)
 					id = parseInt(elements[elements.length - 1].id.substring(5)) + 1;
-				var root = document.createElement('tr');
+				var root = document.createElement('div');
 				root.id = "topic" + id;
-				var topic = document.createElement('td');
-				topic.style.verticalAlign="top";
-				root.appendChild(topic);
+				root.className = "entry";
 				//title
-				var header = document.createElement('div');
-				header.innerHTML = 'Edit topic';
-				header.className = 'ficheTitle';
-				topic.appendChild(header);
-				topic.appendChild(document.createElement('br'));
 				var title = document.createElement('div');
-				topic.appendChild(title);
-				var titleText = document.createElement('div');
-				titleText.innerHTML = 'Title';
-				titleText.className = 'ficheSubtitle';
+				title.className = "form-group";
+				root.appendChild(title);
+				var titleText = document.createElement('label');
+				titleText.htmlFor = 'title' + id;
+				titleText.innerHTML = '<img class="buttonImage" src="images/micro_delete.png" id="image' +id+ '" onclick="deleteTopic(\'topic' +id+ '\');"> Title';
 				title.appendChild(titleText);
 				var titleInput = document.createElement('input');
-				titleInput.className = "form editForm";
+				titleInput.className = "form-control";
 				titleInput.name = "title" + id;
-				titleInput.style.width="98%";
 				titleInput.type = "text";
 				title.appendChild(titleInput);
-				topic.appendChild(document.createElement('br'));
 				//description
 				var description = document.createElement('div');
-				topic.appendChild(description);
-				var descriptionText = document.createElement('div');
+				description.className = "form-group";
+				root.appendChild(description);
+				var descriptionText = document.createElement('label');
+				descriptionText.htmlFor = 'description' + id;
 				descriptionText.innerHTML = 'Description';
-				descriptionText.className = 'ficheSubtitle';
 				description.appendChild(descriptionText);
 				var input = document.createElement('textarea');
-				input.className = "form editForm";
+				input.className = "form-control";
 				input.name = "description" + id;
-				input.style.width="98%";
-				input.rows = 8;
+				input.rows = 4;
 				description.appendChild(input);
-				topic.appendChild(document.createElement('br'));
-				//remove
-				var remove = document.createElement('div');
-				topic.appendChild(remove);
-				var image = document.createElement('img');
-				image.id = "image" + id;
-				remove.align = "left";
-				remove.appendChild(image);
-				image.src = "images/micro_delete.png";
-				image.className = "buttonImage";
-				image.onclick = function(){
-					deleteTopic(root.id);
-				};
-				//append new entry
-				topic.appendChild(document.createElement('br'));
 				document.getElementById('topicList').appendChild(root);
 			}
 		</script>
-		<div align="center">
-			<h1>FAQ</h1>
-		</div>
-		<br />
-		<form action="modifier_faq.php?action=modify_faq" method=POST>
-			<table cellpadding="3" align="center" class="ficheTable" id="topicList">
+
+		<form action="modifier_faq.php?action=modify_faq" method="POST">
+			<div class="ficheTable" id="topicList">
 				<?php
 					$i = 1;
 					while($row = mysql_fetch_array($result)){
-						echo '<tr style="width:100%;" id="topic' . $i . '">
-								<td style="vertical-align: top;">
-									<div class="ficheTitle">Edit topic</div><br/>
-									<div>
-										<div class="ficheSubtitle">Title</div>
-										<input class="form editForm" name="title' . $i . '" type="text" value="'. spec($row['title']) .'" style="width:98%"/>
-									</div>
-									<br/>
-									<div>
-										<div class="ficheSubtitle">Description</div>
-										<textarea class="form editForm" name="description' . $i . '" rows="8" style="width:98%">' . spec($row['description']) .'</textarea>
-									<div>
-									<div align="left">
-										<img class="buttonImage" src="images/micro_delete.png" id="image'. $i . '" onclick="deleteTopic(\'topic' . $i . '\');">
-									</div>
-								</td>
-							</tr>';
+						echo '<div id="topic' . $i . '" class="entry">
+							<div class="form-group">
+								<label for="title' . $i . '"><img class="buttonImage" src="images/micro_delete.png" id="image'. $i . '" onclick="deleteTopic(\'topic' . $i . '\');"> Title </label>
+								<input class="form-control" name="title' . $i . '" type="text" value="'. spec($row['title']) .'" />
+							</div>
+							<div class="form-group">
+								<label for="description' . $i . '">Description </label>
+								<textarea rows="4" class="form-control" name="description' . $i . '">' . spec($row['description']) .'</textarea>
+							</div>
+						</div>';
 						$i++;
 					}
 					if ($i == 1){
@@ -158,28 +122,20 @@
 						</script>';
 					}
 				?>
-			</table>
-			<div class="buttonImage" style="width:150px;margin:10px 10px;"onclick="createTopic();"><img src="images/mini_add.png"> Add 1 more topic</div>
+			</div>
+			<div class="buttonImage" style="width:150px;margin:10px 10px;" onclick="createTopic();"><img src="images/mini_add.png"> Add 1 more topic</div>
 			<?php
 				if(isset($_SESSION['password'])){
 			?>
-				<br /><br />
-				<table width="100%">
-					<tr>
-						<td width="50%">
-							<input type="submit" name="submit" class="button" value="Save" />
-						</td>
-						<td width="50%">
-							<input type="submit" name="submit" class="button" value="Cancel" />
-						</td>
-					</tr>
-				</table>
+				<button type="submit" name="submit" class="button btn btn-primary" value="Save">Save</button>
+				<button type="submit" name="submit" class="button btn btn-default" value="Cancel">Cancel</button>
 			<?php
 				}
 			?>
 		</form>
 	</div>
+</div>
 <?php
 	}
-	include("footer.php");
+	include("footer1_bootstrap.php");
 ?>
