@@ -322,7 +322,7 @@ if (isset($_POST['isbn'])) {
     			$result = mysql_query($query);
     			$insert_id = mysql_insert_id();
     			if ($result) {
-    				echo "##ok##".$insert_id;
+    				echo trim("##ok##".$insert_id);
     			} else {
     				echo "Problème lors de l'ajout de la fiche";
     			}
@@ -355,7 +355,7 @@ if (isset($_POST['isbn'])) {
     			$result = mysql_query($query);
     			$insert_id = mysql_insert_id();
     			if ($result) {
-    				echo "##ok##".$insert_id;
+    				echo trim("##ok##".$insert_id);
     			} else {
     				echo "Problème lors de l'ajout de la fiche";
     			}
@@ -383,7 +383,7 @@ if (isset($_POST['isbn'])) {
     			$query = sql_update('fiches',$fiche,true, $up_id);
     			$result = mysql_query($query);
     			if ($result) {
-    				echo "##okup##".$up_id;
+    				echo trim("##okup##".$up_id);
     			} else {
     				echo "Problème lors de modification de la fiche";
     			}
@@ -409,7 +409,7 @@ if (isset($_POST['isbn'])) {
     			$query = sql_update('fiches',$fiche, true, $up_id);
                 $result = mysql_query($query);
     			if ($result) {
-    				echo "##okup##".$up_id;
+    				echo trim("##okup##".$up_id);
     			} else {
     				echo "Problème lors de modification de la fiche";
     			}
