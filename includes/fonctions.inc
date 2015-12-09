@@ -1,5 +1,5 @@
 <?php
-include ("connect.php");
+include ("connect_production.php");
 //variables
 $titre_projet = "BibUp";
 
@@ -21,10 +21,10 @@ if(!function_exists("imagerotate")) {
         elseif ($src_x >= $src_y) {
             $dest_x = $src_y;
             $dest_y = $src_x; }
-       
+
         $rotate=imagecreatetruecolor($dest_x,$dest_y);
         imagealphablending($rotate, false);
-              
+
         switch ($angle) {
             case 270:
                 for ($y = 0; $y < ($src_y); $y++) {
@@ -455,7 +455,7 @@ function createFolders($foldername){
 	$repertoiredestination = "uploads/".$foldername."/";
 	$repertoiredestination_thumb = "uploads/".$foldername."/thumb/";
 
-	
+
 	$folderExists = is_dir($repertoiredestination);
 	if($folderExists === false) {
 	$old = umask(0);

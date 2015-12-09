@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="unapi-server" type="application/xml" title="unAPI" href="http://elearning.unifr.ch/bibup/unapi.php" />
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" lang="fr" content="universit&eacute;, formation, suisse, fribourg, recherche, &eacute;tudes" />
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<title><?=$titre_projet?>  - University of Fribourg</title>
-	<link rel="unapi-server" type="application/xml" title="unAPI" href="http://elearning.unifr.ch/bibup/unapi.php" />
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
 	<!-- Open Sans from Google fonts -->
@@ -79,17 +79,27 @@
 										$m2 = '';
 										$m3 = 'class="active"';
 										$m4 = '';
-									} else {
+									} else if ($page == 'contact.php') {
 										$m1 = '';
 										$m2 = '';
 										$m3 = '';
 										$m4 = 'class="active"';
+									} else {
+										$m1 = '';
+										$m2 = '';
+										$m3 = '';
+										$m4 = '';
 									}
 								?>
                                 <li <?php echo $m1 ?>><a href="index.php">References</a></li>
                                 <li <?php echo $m2 ?>><a href="tutorial.php">Tutorial</a></li>
                                 <li <?php echo $m3 ?>><a href="faq.php">FAQ</a></li>
                                 <li><a href="https://www.unifr.ch/survey/start/index.php?sid=95831&lang=en" target="_blank">Feedback</a></li>
+								<?php
+								if (isset($_SESSION['password'])) {
+									echo '<li><a href="logout.php">Logout</a></li>';
+								}
+								?>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
 								<li <?php echo $m4 ?>><a href="contact.php">Contact</a></li>
