@@ -1,5 +1,5 @@
 <?php
-include ("connect.php");
+include ("connect_production.php");
 //variables
 $titre_projet = "BibUp";
 
