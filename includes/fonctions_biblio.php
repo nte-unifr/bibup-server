@@ -172,7 +172,6 @@ function isbn13to10($isbn) {
 	if ($data->stat == 'ok') {
 		$isbn = $data->list[0]->isbn[0];
 	}
-	echo $isbn;
 	return $isbn;
 }
 
@@ -213,7 +212,7 @@ function mods_from_data($data) {
 	$mods .= '<typeOfResource>text</typeOfResource>';
 	$mods .= '<titleInfo><title>' . XMLClean($data['list'][0]['title']) . '</title></titleInfo>';
 	$mods .= '<name type="personal"><namePart>' . $data['list'][0]['author'] . '</namePart>	</name>';
-	$mods .= '<identifier type="isbn">' . $_POST['isbn'] . '</identifier>';
+	$mods .= '<identifier type="isbn">' . $data->list[0]->isbn[0] . '</identifier>';
 	$mods .= '<originInfo><publisher>' . XMLClean($data['list'][0]['publisher']) . '</publisher><copyrightDate>' . $data['list'][0]['year'] . '</copyrightDate><edition>' . $data['list'][0]['ed'] . '</edition></originInfo>';
 	if ($data['list'][0]['file'] <> '') {
 		$mods .= '<location><url displayLabel="Image scannée" access="raw object">http://nte2.unifr.ch/tests/biblio_jm/uploads/'.$data['list'][0]['file'] . '</url></location>';
