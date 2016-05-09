@@ -178,7 +178,7 @@ function isbn13to10($isbn) {
 
 function json_data_from_isbn($isbn) {
 
-	$isbn = isbn13to10($isbn);
+	#$isbn = isbn13to10($isbn);
 	$strResult = new HTTPRequest('http://xisbn.worldcat.org/webservices/xid/isbn/' . $isbn . '?method=getMetadata&fl=*&format=json');
 	$strResult = $strResult->DownloadToString();
 	return json_decode($strResult);
