@@ -228,7 +228,7 @@ function mods_from_json_data_isbn($data) {
 	$mods .= '<typeOfResource>text</typeOfResource>';
 	$mods .= '<titleInfo><title>' . XMLClean($data->list[0]->title) . '</title></titleInfo>';
 	$mods .= '<name type="personal"><namePart>' . XMLClean($data->list[0]->author) . '</namePart>	</name>';
-	$mods .= '<identifier type="isbn">' . $_POST['isbn'] . '</identifier>';
+	$mods .= '<identifier type="isbn">' . $data->list[0]->isbn[0] . '</identifier>';
 	$mods .= '<originInfo><publisher>' . XMLClean($data->list[0]->publisher) . '</publisher><copyrightDate>' . XMLClean($data->list[0]->year) . '</copyrightDate><edition>' . XMLClean($data->list[0]->ed) . '</edition></originInfo>';
 	if ($data->list[0]->file1 <> '') {
 		$location = file_location(substr($data->list[0]->file1,0,-11));
