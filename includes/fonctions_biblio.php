@@ -6,19 +6,19 @@ define("NO_OCR","No OCR is performed for users from outside the University of Fr
 
 //include('dBug.php');
 /*
-OpenURL() constructs an NISO Z39.88 compliant ContextObject for use in OpenURL links and COinS.  It returns 
+OpenURL() constructs an NISO Z39.88 compliant ContextObject for use in OpenURL links and COinS.  It returns
 the proper query string, which you must embed in a <span></span> thus:
- 
+
 <span class="Z3988" title="<?php print OpenURL($Document, $People) ?>">Content of your choice goes here</span>
- 
+
 This span will work with Zotero. You can also use the output of OpenURL() to link to your library's OpenURL resolver, thus:
- 
+
 <a href="http://www.lib.utexas.edu:9003/sfx_local?<?php print OpenURL($Document, $People); ?>" title="Search for a copy of this document in UT's libraries">Find it at UT!</a>
- 
+
 Replace "http://www.lib.utexas.edu:9003/sfx_local?" with the correct resolver for your library.
- 
+
 OpenURL() takes two arguments.
- 
+
 $Document - a document object, having an array (fields) with the following properties:
 	$Document->fields["DocType"]
 		1 = Article
@@ -26,12 +26,12 @@ $Document - a document object, having an array (fields) with the following prope
 		3 = Book
 		4 = Unpublished MA thesis
 		5 = Unpublished PhD thesis
- 
+
 	$Document->fields["DocTitle"] - Title of the document.
 	$Document->fields["JournalTitle"] - Title of the journal/magazine the article was published in, or false if this is not an article.
- 
+
 	$Document->fields["BookTitle"] - Title of the book in which this item was published, or false if this is not a book item.
- 
+
 	$Document->fields["Volume"] - The volume of the journal this article was published in as an integer, or false if this is not an article.  Optional.
 	$Document->fields["JournalIssue"] - The issue of the journal this article was published in as an integer, or false if this is not an article.  Optional.
 	$Document->fields["JournalSeason"] Optional.
@@ -43,17 +43,17 @@ $Document - a document object, having an array (fields) with the following prope
 			false = not applicable
 	$Document->fields["JournalQuarter"] - The quarter of the journal this article was published in as an integer between 1 and 4, or false. Optional.
 	$Document->fields["ISSN"] - The volume of the journal this article was published in, or false.  Optional.
- 
- 
+
+
 	$Document->fields["BookPublisher"] - The publisher of the book, or false. Optional.
 	$Document->fields["PubPlace"] - The publication place, or false.  Optional.
 	$Document->fields["ISBN"] - The ISBN of the book.  Optional but highly recommended.
- 
+
 	$Document->fields["StartPage"] - Start page for the article or item, or false if this is a complete book.
 	$Document->fields["EndPage"] - End page for the article or item, or false if this is a complete book.
- 
+
 $Document->fields["DocYear"] - The year in which this document was published.
- 
+
 $People - An array of person objects, each having an array, fields, with these properties:
 	$People->fields["DocRelationship"]
 		An integer indicating what kind of relationship the person has to this document.
@@ -66,33 +66,33 @@ $People - An array of person objects, each having an array, fields, with these p
 function OpenURL($Document, $People){
 	$DocType = $Document["DocType"];
 	if($DocType > 2){ return false; }
- 
+
 	// Base of the OpenURL specifying which version of the standard we're using.
 	$URL = "ctx_ver=Z39.88-2004";
- 
+
 	// Metadata format - e.g. article or book.
 	if($DocType == 0){ $URL .= "&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal"; }
 	if($DocType > 0){ $URL .= "&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook"; }
- 
+
 	// An ID for your application.  Replace yoursite.com and specify a name for your application.
 	$URL .= "&amp;rfr_id=info%3Asid%2Fyoursite.com%3AYour+Name+Here+Using+Plus+Signs+For+Spaces";
- 
+
 	// Document Genre
 	if($DocType == 0){ $URL .= "&amp;rft.genre=article"; }
 	if($DocType == 1){ $URL .= "&amp;rft.genre=bookitem"; }
-	if($DocType == 2){ 
-		$URL .= "&amp;rft.genre=book"; 
+	if($DocType == 2){
+		$URL .= "&amp;rft.genre=book";
 		$URL .= "&amp;rft.edition=".urlencode($Document["Edition"]);
 	}
- 
+
 	// Document Title
 	if($DocType < 2){ $URL .= "&amp;rft.atitle=".urlencode($Document["DocTitle"]); }
 	if($DocType == 2){ $URL .= "&amp;rft.btitle=".urlencode($Document["DocTitle"]); }
- 
+
 	// Publication Title
 	if($DocType == 0){ $URL .= "&amp;rft.jtitle=".urlencode($Document["JournalTitle"]); }
 	if($DocType == 1){ $URL .= "&amp;rft.btitle=".urlencode($Document["BookTitle"]); }
- 
+
 	// Volume, Issue, Season, Quarter, and ISSN (for journals)
 	if($DocType == 0){
 		if($Document["Volume"]){ $URL .= "&amp;rft.volume=".urlencode($Document["Volume"]); }
@@ -101,14 +101,14 @@ function OpenURL($Document, $People){
 		if($Document["JournalQuarter"]){ $URL .= "&amp;rft.quarter=".urlencode($Document["JournalQuarter"]); }
 		if($Document["JournalQuarter"]){ $URL .= "&amp;rft.quarter=".urlencode($Document["ISSN"]); }
 	}
- 
+
 	// Publisher, Publication Place, and ISBN (for books)
 	if($DocType > 0){
 		$URL .= "&amp;rft.pub=".urlencode($Document["BookPublisher"]);
 		$URL .= "&amp;rft.place=".urlencode($Document["PubPlace"]);
 		$URL .= "&amp;rft.isbn=".urlencode($Document["ISBN"]);
 	}
- 
+
 	// Start page and end page (for journals and book articles)
 	if($DocType < 2){
 		$URL .= "&amp;rft.spage=".urlencode($Document["StartPage"]);
@@ -121,7 +121,7 @@ function OpenURL($Document, $People){
 	$URL .= "&amp;rft.extra=test";
 	// Publication year.
 	$URL .= "&amp;rft.date=".$Document["DocYear"];
- 
+
 	// Authors
 	$i = 0;
 	while($People[$i]){
@@ -130,7 +130,7 @@ function OpenURL($Document, $People){
 		}
 		$i++;
 	}
- 
+
 	return $URL;
 }
 
@@ -166,8 +166,19 @@ function data_from_isbn($isbn) {
 //$newResult = json_decode($strResult,true);
 }
 
+function isbn13to10($isbn) {
+	$request = new HTTPRequest('http://xisbn.worldcat.org/webservices/xid/isbn/'. $isbn .'?method=to10&format=json');
+	$data = json_decode($request->DownloadToString());
+	if ($data->stat == 'ok') {
+		$isbn = $data->list[0]->isbn[0];
+	}
+	echo $isbn;
+	return $isbn;
+}
+
 function json_data_from_isbn($isbn) {
 
+	$isbn = isbn13to10($isbn);
 	$strResult = new HTTPRequest('http://xisbn.worldcat.org/webservices/xid/isbn/' . $isbn . '?method=getMetadata&fl=*&format=json');
 	$strResult = $strResult->DownloadToString();
 	return json_decode($strResult);
