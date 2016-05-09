@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="unapi-server" type="application/xml" title="unAPI" href="bibup/unapi.php" />
+<link rel="unapi-server" type="application/xml" title="unAPI" href="unapi.php" />
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
