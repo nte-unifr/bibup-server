@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="unapi-server" type="application/xml" title="unAPI" href="https://elearning.unifr.ch/bibup/unapi.php" />
+<link rel="unapi-server" type="application/xml" title="unAPI" href="http://elearning.unifr.ch/bibup/unapi.php" />
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
