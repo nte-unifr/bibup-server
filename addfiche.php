@@ -309,6 +309,7 @@ if (isset($_POST['isbn'])) {
     			$data->list[0]->text2 = $text2;
     //			$data->list[0]->file1 = $file1;
     			$fiche['mods'] = mysql_real_escape_string(mods_from_json_data_isbn($data));
+                $fiche['rdf'] = mysql_real_escape_string(rdf_from_json_data_isbn($data));
     			$fiche['contentSnapshot'] = $file1;
     			$fiche['textOCR'] = addslashes($text1);
     			$fiche['titleSnapshot'] = $file2;
@@ -375,6 +376,7 @@ if (isset($_POST['isbn'])) {
     			$data->list[0]->text1 = mysql_result($res, 0);//$text1; //get from db
     			$data->list[0]->text2 = $text2;
     			$fiche['mods'] = mysql_real_escape_string(mods_from_json_data_isbn($data));
+                $fiche['rdf'] = mysql_real_escape_string(rdf_from_json_data_isbn($data));
     			$fiche['titleSnapshot'] = $file2;
     			$fiche['titleOCR'] = addslashes($text2);
                 if ($OCRtodo == true) {

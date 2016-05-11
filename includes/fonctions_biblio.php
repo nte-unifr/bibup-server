@@ -277,10 +277,104 @@ function mods_from_json_data_issn($data) {
 	if ($data->group[0]->text2 <> '') {
 		$mods .= '<note>OCRed Title : ' . XMLClean($data->group[0]->text2) . '</note>';
 	}
-	$mods .= '<note>Worldcat : '.$data->list[0]->url[0].'</note>';
 
 	$mods .= '</mods>';
 	return $mods;
+}
+
+function rdf_from_json_data_isbn($data) {
+	$rdf = '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:z="http://www.zotero.org/namespaces/export#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:bib="http://purl.org/net/biblio#" xmlns:dcterms="http://purl.org/dc/terms/">';
+	$rdf .=     '<bib:Book rdf:about="urn:isbn:'.XMLClean($data->list[0]->isbn[0]).'">';
+	$rdf .=         '<z:itemType>book</z:itemType>';
+	$rdf .=         '<dc:publisher>';
+	$rdf .=             '<foaf:Organization>';
+	$rdf .=                 '<foaf:name>'.XMLClean($data->list[0]->publisher).'</foaf:name>';
+	$rdf .=             '</foaf:Organization>';
+	$rdf .=         '</dc:publisher>';
+	$rdf .=         '<bib:authors>';
+	$rdf .=             '<rdf:Seq>';
+	$rdf .=                 '<rdf:li>';
+	$rdf .=                     '<foaf:Person>';
+	$rdf .=                         '<foaf:name>'.XMLClean($data->list[0]->author).'</foaf:name>';
+	$rdf .=                     '</foaf:Person>';
+	$rdf .=                 '</rdf:li>';
+	$rdf .=             '</rdf:Seq>';
+	$rdf .=         '</bib:authors>';
+	if (!empty($_POST['note'])) {
+		$rdf .= 	'<dcterms:isReferencedBy rdf:resource="#note"/>';
+	}
+	if ($data->group[0]->text1 <> '') {
+		$rdf .=		'<dcterms:isReferencedBy rdf:resource="#ocred_extract"/>';
+	}
+	if ($data->group[0]->text2 <> '') {
+		$rdf .= 	'<dcterms:isReferencedBy rdf:resource="#ocred_title"/>';
+	}
+	if ($data->list[0]->file1 <> '') {
+	    $rdf .=     '<link:link rdf:resource="#file1"/>';
+	}
+	if ($data->list[0]->file2 <> '') {
+	    $rdf .=     '<link:link rdf:resource="#file2"/>';
+	}
+	$rdf .=         '<link:link rdf:resource="#worldcat"/>';
+	$rdf .=         '<dc:identifier>ISBN '.XMLClean($data->list[0]->isbn[0]).'</dc:identifier>';
+	$rdf .=         '<dc:date>'.XMLClean($data->list[0]->year).'</dc:date>';
+	$rdf .=         '<dcterms:dateSubmitted>2016-05-11 12:35:45</dcterms:dateSubmitted>';
+	$rdf .=         '<z:libraryCatalog>elearning.unifr.ch</z:libraryCatalog>';
+	$rdf .=         '<dc:title>'.XMLClean($data->list[0]->title).'</dc:title>';
+	$rdf .=     '</bib:Book>';
+	if (!empty($_POST['note'])) {
+		$rdf .= '<bib:Memo rdf:about="#note">';
+		$rdf .=     '<rdf:value>'.XMLClean($_POST['note']).'</rdf:value>';
+		$rdf .= '</bib:Memo>';
+	}
+	if ($data->group[0]->text1 <> '') {
+		$rdf .= '<bib:Memo rdf:about="#ocred_extract">';
+		$rdf .=     '<rdf:value>'.XMLClean($data->group[0]->text1).'</rdf:value>';
+		$rdf .= '</bib:Memo>';
+	}
+	if ($data->group[0]->text2 <> '') {
+		$rdf .= '<bib:Memo rdf:about="#ocred_title">';
+		$rdf .=     '<rdf:value>'.XMLClean($data->group[0]->text2).'</rdf:value>';
+		$rdf .= '</bib:Memo>';
+	}
+	if ($data->list[0]->file1 <> '') {
+	    $location = file_location(substr($data->list[0]->file1,0,-9));
+	    $rdf .= '<z:Attachment rdf:about="#file1">';
+	    $rdf .=     '<z:itemType>attachment</z:itemType>';
+	    $rdf .=     '<dc:identifier>';
+	    $rdf .=         '<dcterms:URI>';
+	    $rdf .=             <rdf:value>'.$location . $data->list[0]->file1.'</rdf:value>;
+	    $rdf .=         '</dcterms:URI>';
+	    $rdf .=     '</dc:identifier>';
+	    $rdf .=     '<dc:title>File 1</dc:title>';
+	    $rdf .=     '<z:linkMode>3</z:linkMode>';
+	    $rdf .= '</z:Attachment>';
+	}
+	if ($data->list[0]->file2 <> '') {
+	    $location = file_location(substr($data->list[0]->file2,0,-9));
+	    $rdf .= '<z:Attachment rdf:about="#file2">';
+	    $rdf .=     '<z:itemType>attachment</z:itemType>';
+	    $rdf .=     '<dc:identifier>';
+	    $rdf .=         '<dcterms:URI>';
+	    $rdf .=             <rdf:value>'.$location . $data->list[0]->file2.'</rdf:value>;
+	    $rdf .=         '</dcterms:URI>';
+	    $rdf .=     '</dc:identifier>';
+	    $rdf .=     '<dc:title>File 2</dc:title>';
+	    $rdf .=     '<z:linkMode>3</z:linkMode>';
+	    $rdf .= '</z:Attachment>';
+	}
+	$rdf .=     '<z:Attachment rdf:about="#worldcat">';
+	$rdf .=         '<z:itemType>attachment</z:itemType>';
+	$rdf .=         '<dc:identifier>';
+	$rdf .=             '<dcterms:URI>';
+	$rdf .=                 <rdf:value>'.XMLClean($data->list[0]->url[0]).'</rdf:value>;
+	$rdf .=             '</dcterms:URI>';
+	$rdf .=         '</dc:identifier>';
+	$rdf .=         '<dc:title>Worldcat</dc:title>';
+	$rdf .=         '<z:linkMode>3</z:linkMode>';
+	$rdf .=     '</z:Attachment>';
+	$rdf .= '</rdf:RDF>';
+	return $rdf;
 }
 
 function getOCRText($uploadfile) {
