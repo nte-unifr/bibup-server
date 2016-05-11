@@ -283,7 +283,7 @@ function mods_from_json_data_issn($data) {
 }
 
 function rdf_from_json_data_isbn($data) {
-	$rdf = '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:z="http://www.zotero.org/namespaces/export#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:bib="http://purl.org/net/biblio#" xmlns:dcterms="http://purl.org/dc/terms/">';
+	$rdf = '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:z="http://www.zotero.org/namespaces/export#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:bib="http://purl.org/net/biblio#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:link="http://purl.org/rss/1.0/modules/link/">';
 	$rdf .=     '<bib:Book rdf:about="urn:isbn:'.XMLClean($data->list[0]->isbn[0]).'">';
 	$rdf .=         '<z:itemType>book</z:itemType>';
 	$rdf .=         '<dc:publisher>';
