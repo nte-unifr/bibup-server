@@ -343,7 +343,7 @@ function rdf_from_json_data_isbn($data) {
 	    $rdf .=     '<z:itemType>attachment</z:itemType>';
 	    $rdf .=     '<dc:identifier>';
 	    $rdf .=         '<dcterms:URI>';
-	    $rdf .=             <rdf:value>'.$location . $data->list[0]->file1.'</rdf:value>;
+	    $rdf .=             '<rdf:value>'.$location . $data->list[0]->file1.'</rdf:value>';
 	    $rdf .=         '</dcterms:URI>';
 	    $rdf .=     '</dc:identifier>';
 	    $rdf .=     '<dc:title>File 1</dc:title>';
@@ -356,7 +356,7 @@ function rdf_from_json_data_isbn($data) {
 	    $rdf .=     '<z:itemType>attachment</z:itemType>';
 	    $rdf .=     '<dc:identifier>';
 	    $rdf .=         '<dcterms:URI>';
-	    $rdf .=             <rdf:value>'.$location . $data->list[0]->file2.'</rdf:value>;
+	    $rdf .=             '<rdf:value>'.$location . $data->list[0]->file2.'</rdf:value>';
 	    $rdf .=         '</dcterms:URI>';
 	    $rdf .=     '</dc:identifier>';
 	    $rdf .=     '<dc:title>File 2</dc:title>';
@@ -367,7 +367,7 @@ function rdf_from_json_data_isbn($data) {
 	$rdf .=         '<z:itemType>attachment</z:itemType>';
 	$rdf .=         '<dc:identifier>';
 	$rdf .=             '<dcterms:URI>';
-	$rdf .=                 <rdf:value>'.XMLClean($data->list[0]->url[0]).'</rdf:value>;
+	$rdf .=                 '<rdf:value>'.XMLClean($data->list[0]->url[0]).'</rdf:value>';
 	$rdf .=             '</dcterms:URI>';
 	$rdf .=         '</dc:identifier>';
 	$rdf .=         '<dc:title>Worldcat</dc:title>';
