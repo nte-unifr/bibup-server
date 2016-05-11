@@ -246,7 +246,7 @@ function mods_from_json_data_isbn($data) {
 	if ($data->list[0]->text2 <> '') {
 		$mods .= '<note>OCRed Title : ' . XMLClean($data->list[0]->text2) . '</note>';
 	}
-	$mods .= '<link><url displayLabel="Worldcat">'.$data->list[0]->url.'</url></link>';
+	$mods .= '<note>Worldcat : '.$data->list[0]->url.'</note>';
 	$mods .= '</mods>';
 	return $mods;
 }
@@ -278,7 +278,7 @@ function mods_from_json_data_issn($data) {
 	if ($data->group[0]->text2 <> '') {
 		$mods .= '<note>OCRed Title : ' . XMLClean($data->group[0]->text2) . '</note>';
 	}
-	$mods .= '<link><url displayLabel="Worldcat">'.$data->list[0]->url.'</url></link>';
+	$mods .= '<note>Worldcat : '.$data->list[0]->url.'</note>';
 
 	$mods .= '</mods>';
 	return $mods;
