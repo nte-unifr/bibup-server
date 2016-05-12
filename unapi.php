@@ -30,7 +30,7 @@ if ( $id ) {
 // create XML for responses
 $xmlHeader = '<?xml version="1.0" encoding="utf-8" ?>' . "\n";
 $formats  = '<format name="mods" type="application/xml" docs="http://www.loc.gov/standards/mods/" />' . "\n";
-// $formats  .= '<format name="rdf_zotero" type="application/xml" docs="http://www.w3.org/1999/02/22-rdf-syntax-ns#" />' . "\n";
+$formats  .= '<format name="rdf_zotero" type="application/xml" docs="http://www.w3.org/1999/02/22-rdf-syntax-ns#" />' . "\n";
 
 // main brancher: select response depending on presence/absence of identifier and format
 if ( $format )
