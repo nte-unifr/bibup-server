@@ -16,11 +16,13 @@ if (!file_exists($running_ocr)) {
 		$titleOCR = "";
 		echo($row["id"]);
 		$mods = $row["mods"];
+		$rdf = $row["rdf"];
 		if (!empty($row['contentSnapshot'])) {
 			$foldername = substr($row['contentSnapshot'],0,-11);
 			$file = "uploads/" . $foldername . "/" . $row['contentSnapshot'];
 			$contentOCR = getOCRText($file);
 			$mods = str_replace(EXTRACT_OCR_PENDING, XMLClean($contentOCR), $mods);
+			$rdf = str_replace(EXTRACT_OCR_PENDING, XMLClean($contentOCR), $rdf);
 //			echo $contentOCR;
 		}
 		if (!empty($row['titleSnapshot'])) {
@@ -28,6 +30,7 @@ if (!file_exists($running_ocr)) {
 			$file = "uploads/" . $foldername . "/" . $row['titleSnapshot'];
 			$titleOCR = getOCRText($file);
 			$mods = str_replace(TITLE_OCR_PENDING, XMLClean($titleOCR), $mods);
+			$rdf = str_replace(TITLE_OCR_PENDING, XMLClean($titleOCR), $rdf);
 //			echo $titleOCR;
 		}
 		$query = "update fiches set OCRtodo = false";
@@ -37,6 +40,7 @@ if (!file_exists($running_ocr)) {
 		if (!empty($titleOCR)) {
 			$query .= ", titleOCR = '" . addslashes($titleOCR) . "'";
 		}
+		$query .= ", rdf = '" . addslashes($rdf) . "'";
 		$query .= ", mods = '" . addslashes($mods) . "' where id =" . $row["id"];
 //		echo $query . "</br>";
 		$result1 = mysql_query($query) or die("<br />couldn't execute query");
