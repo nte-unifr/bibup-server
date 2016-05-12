@@ -352,17 +352,17 @@ function rdf_from_json_data($data, $identifier) {
 		$rdf .=     '<rdf:value>'.XMLClean($_POST['note']).'</rdf:value>';
 		$rdf .= '</bib:Memo>';
 	}
-	if ($data->list[0]->text1 <> '') {
+	if ($text1 <> '') {
 		$rdf .= '<bib:Memo rdf:about="#ocred_extract">';
 		$rdf .=     '<rdf:value>'.$text1.'</rdf:value>';
 		$rdf .= '</bib:Memo>';
 	}
-	if ($data->list[0]->text2 <> '') {
+	if ($text2 <> '') {
 		$rdf .= '<bib:Memo rdf:about="#ocred_title">';
 		$rdf .=     '<rdf:value>'.$text2.'</rdf:value>';
 		$rdf .= '</bib:Memo>';
 	}
-	if ($data->list[0]->file1 <> '') {
+	if ($file1 <> '') {
 	    $location = file_location(substr($file1,0,-11));
 	    $rdf .= '<z:Attachment rdf:about="#file1">';
 	    $rdf .=     '<z:itemType>attachment</z:itemType>';
@@ -375,7 +375,7 @@ function rdf_from_json_data($data, $identifier) {
 	    $rdf .=     '<z:linkMode>3</z:linkMode>';
 	    $rdf .= '</z:Attachment>';
 	}
-	if ($data->list[0]->file2 <> '') {
+	if ($file2 <> '') {
 	    $location = file_location(substr($file2,0,-9));
 	    $rdf .= '<z:Attachment rdf:about="#file2">';
 	    $rdf .=     '<z:itemType>attachment</z:itemType>';
