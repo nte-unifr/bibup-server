@@ -328,7 +328,7 @@ function rdf_from_json_data($data, $identifier) {
 	$rdf .=         '<dc:date>'.XMLClean($data->list[0]->year).'</dc:date>';
 	$rdf .=         '<z:libraryCatalog>elearning.unifr.ch</z:libraryCatalog>';
 	$rdf .=         '<dc:title>'.XMLClean($data->list[0]->title).'</dc:title>';
-	$rdf .=     '</bib:Book>';
+	$rdf .=     '</bib:'.$type.'>';
 	if (!empty($_POST['note'])) {
 		$rdf .= '<bib:Memo rdf:about="#note">';
 		$rdf .=     '<rdf:value>'.XMLClean($_POST['note']).'</rdf:value>';
