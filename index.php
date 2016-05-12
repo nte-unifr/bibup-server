@@ -80,7 +80,7 @@ $tagOnFocus = '';
                                 echo("<a href=\"" . dirname($_SERVER['SCRIPT_NAME']) . "/uploads/".substr($row['contentSnapshot'],0,-11)."/" . $row['contentSnapshot'] . "\"");
 
         						if (strlen($row['textOCR']) > 0) {
-        							echo " title=\"" . truncate_string($row['textOCR'],200) . "\"";
+        							echo " title=\"" . htmlentities(truncate_string($row['textOCR'],200)) . "\"";
                                 };
 
         						echo "><img src=\"". dirname($_SERVER['SCRIPT_NAME']) . "/uploads/".substr($row['contentSnapshot'],0,-11)."/thumb/" . $row['contentSnapshot']. "\"";
@@ -96,7 +96,7 @@ $tagOnFocus = '';
                                 echo("<a href=\"" . dirname($_SERVER['SCRIPT_NAME'])                            . "/uploads/".substr($row['titleSnapshot'],0,-9)."/" . $row['titleSnapshot'] . "\"");
 
         						if (strlen($row['titleOCR']) > 0) {
-                                	echo " title=\"" . $row['titleOCR'] . "\"";
+                                	echo " title=\"" . htmlentities($row['titleOCR']) . "\"";
                                 };
 
         						echo "><img src=\"". dirname($_SERVER['SCRIPT_NAME']) . "/uploads/".substr($row['titleSnapshot'],0,-9)."/thumb/" . $row['titleSnapshot']. "\"";
