@@ -314,7 +314,7 @@ function rdf_from_json_data($data, $identifier) {
 	$rdf .=         '<z:itemType>'.$exType.'</z:itemType>';
 	$rdf .=         '<dc:publisher>';
 	$rdf .=             '<foaf:Organization>';
-	$rdf .=                 '<foaf:name>'.$publisher.'</foaf:name>';
+	$rdf .=                 '<foaf:surname>'.$publisher.'</foaf:surname>';
 	$rdf .=             '</foaf:Organization>';
 	$rdf .=         '</dc:publisher>';
 	$rdf .=         '<bib:authors>';
