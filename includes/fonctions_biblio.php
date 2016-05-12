@@ -286,24 +286,42 @@ function rdf_from_json_data($data, $identifier) {
 	if ($identifier === "isbn") {
 		$type = "Book";
 		$exType = "book";
+		$publisher = XMLClean($data->list[0]->publisher);
+		$author = XMLClean($data->list[0]->author);
+		$idnumber = XMLClean($data->list[0]->isbn[0]);
+		$year = XMLClean($data->list[0]->year);
+		$file1 = $data->list[0]->file1;
+		$file2 = $data->list[0]->file2;
+		$text1 = $data->list[0]->text1;
+		$text2 = $data->list[0]->text2;
+		$title = XMLClean($data->list[0]->title);
 	}
 	else {
 		$type= "Article";
 		$exType = "journalArticle";
+		$publisher = XMLClean($data->group[0]->list[0]->publisher);
+		$author = '';
+		$idnumber = XMLClean($data->group[0]->list[0]->issn);
+		$year = '';
+		$file1 = $data->group[0]->file1;
+		$file2 = $data->group[0]->file2;
+		$text1 = $data->group[0]->text1;
+		$text2 = $data->group[0]->text2;
+		$title = XMLClean($data->group[0]->list[0]->title);
 	}
 	$rdf = '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:z="http://www.zotero.org/namespaces/export#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:bib="http://purl.org/net/biblio#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:link="http://purl.org/rss/1.0/modules/link/">';
-	$rdf .=     '<bib:'.$type.' rdf:about="urn:isbn:'.XMLClean($data->list[0]->isbn[0]).'">';
+	$rdf .=     '<bib:'.$type.' rdf:about="urn:'.$identifier.':'.$idnumber.'">';
 	$rdf .=         '<z:itemType>'.$exType.'</z:itemType>';
 	$rdf .=         '<dc:publisher>';
 	$rdf .=             '<foaf:Organization>';
-	$rdf .=                 '<foaf:name>'.XMLClean($data->list[0]->publisher).'</foaf:name>';
+	$rdf .=                 '<foaf:name>'.$publisher.'</foaf:name>';
 	$rdf .=             '</foaf:Organization>';
 	$rdf .=         '</dc:publisher>';
 	$rdf .=         '<bib:authors>';
 	$rdf .=             '<rdf:Seq>';
 	$rdf .=                 '<rdf:li>';
 	$rdf .=                     '<foaf:Person>';
-	$rdf .=                         '<foaf:name>'.XMLClean($data->list[0]->author).'</foaf:name>';
+	$rdf .=                         '<foaf:name>'.$author.'</foaf:name>';
 	$rdf .=                     '</foaf:Person>';
 	$rdf .=                 '</rdf:li>';
 	$rdf .=             '</rdf:Seq>';
@@ -311,46 +329,46 @@ function rdf_from_json_data($data, $identifier) {
 	if (!empty($_POST['note'])) {
 		$rdf .= 	'<dcterms:isReferencedBy rdf:resource="#note"/>';
 	}
-	if ($data->group[0]->text1 <> '') {
+	if ($text1 <> '') {
 		$rdf .=		'<dcterms:isReferencedBy rdf:resource="#ocred_extract"/>';
 	}
-	if ($data->group[0]->text2 <> '') {
+	if ($text2 <> '') {
 		$rdf .= 	'<dcterms:isReferencedBy rdf:resource="#ocred_title"/>';
 	}
-	if ($data->list[0]->file1 <> '') {
+	if ($file1 <> '') {
 	    $rdf .=     '<link:link rdf:resource="#file1"/>';
 	}
-	if ($data->list[0]->file2 <> '') {
+	if ($file2 <> '') {
 	    $rdf .=     '<link:link rdf:resource="#file2"/>';
 	}
 	$rdf .=         '<link:link rdf:resource="#worldcat"/>';
-	$rdf .=         '<dc:identifier>ISBN '.XMLClean($data->list[0]->isbn[0]).'</dc:identifier>';
-	$rdf .=         '<dc:date>'.XMLClean($data->list[0]->year).'</dc:date>';
+	$rdf .=         '<dc:identifier>'.strtoupper($identifier).' '.$idnumber.'</dc:identifier>';
+	$rdf .=         '<dc:date>'.$year.'</dc:date>';
 	$rdf .=         '<z:libraryCatalog>elearning.unifr.ch</z:libraryCatalog>';
-	$rdf .=         '<dc:title>'.XMLClean($data->list[0]->title).'</dc:title>';
+	$rdf .=         '<dc:title>'.$title.'</dc:title>';
 	$rdf .=     '</bib:'.$type.'>';
 	if (!empty($_POST['note'])) {
 		$rdf .= '<bib:Memo rdf:about="#note">';
 		$rdf .=     '<rdf:value>'.XMLClean($_POST['note']).'</rdf:value>';
 		$rdf .= '</bib:Memo>';
 	}
-	if ($data->group[0]->text1 <> '') {
+	if ($data->list[0]->text1 <> '') {
 		$rdf .= '<bib:Memo rdf:about="#ocred_extract">';
-		$rdf .=     '<rdf:value>'.XMLClean($data->group[0]->text1).'</rdf:value>';
+		$rdf .=     '<rdf:value>'.$text1.'</rdf:value>';
 		$rdf .= '</bib:Memo>';
 	}
-	if ($data->group[0]->text2 <> '') {
+	if ($data->list[0]->text2 <> '') {
 		$rdf .= '<bib:Memo rdf:about="#ocred_title">';
-		$rdf .=     '<rdf:value>'.XMLClean($data->group[0]->text2).'</rdf:value>';
+		$rdf .=     '<rdf:value>'.$text2.'</rdf:value>';
 		$rdf .= '</bib:Memo>';
 	}
 	if ($data->list[0]->file1 <> '') {
-	    $location = file_location(substr($data->list[0]->file1,0,-9));
+	    $location = file_location(substr($file1,0,-11));
 	    $rdf .= '<z:Attachment rdf:about="#file1">';
 	    $rdf .=     '<z:itemType>attachment</z:itemType>';
 	    $rdf .=     '<dc:identifier>';
 	    $rdf .=         '<dcterms:URI>';
-	    $rdf .=             '<rdf:value>'.$location . $data->list[0]->file1.'</rdf:value>';
+	    $rdf .=             '<rdf:value>'.$location . $file1.'</rdf:value>';
 	    $rdf .=         '</dcterms:URI>';
 	    $rdf .=     '</dc:identifier>';
 	    $rdf .=     '<dc:title>File 1</dc:title>';
@@ -358,28 +376,30 @@ function rdf_from_json_data($data, $identifier) {
 	    $rdf .= '</z:Attachment>';
 	}
 	if ($data->list[0]->file2 <> '') {
-	    $location = file_location(substr($data->list[0]->file2,0,-9));
+	    $location = file_location(substr($file2,0,-9));
 	    $rdf .= '<z:Attachment rdf:about="#file2">';
 	    $rdf .=     '<z:itemType>attachment</z:itemType>';
 	    $rdf .=     '<dc:identifier>';
 	    $rdf .=         '<dcterms:URI>';
-	    $rdf .=             '<rdf:value>'.$location . $data->list[0]->file2.'</rdf:value>';
+	    $rdf .=             '<rdf:value>'.$location . $file2.'</rdf:value>';
 	    $rdf .=         '</dcterms:URI>';
 	    $rdf .=     '</dc:identifier>';
 	    $rdf .=     '<dc:title>File 2</dc:title>';
 	    $rdf .=     '<z:linkMode>3</z:linkMode>';
 	    $rdf .= '</z:Attachment>';
 	}
-	$rdf .=     '<z:Attachment rdf:about="#worldcat">';
-	$rdf .=         '<z:itemType>attachment</z:itemType>';
-	$rdf .=         '<dc:identifier>';
-	$rdf .=             '<dcterms:URI>';
-	$rdf .=                 '<rdf:value>'.XMLClean($data->list[0]->url[0]).'</rdf:value>';
-	$rdf .=             '</dcterms:URI>';
-	$rdf .=         '</dc:identifier>';
-	$rdf .=         '<dc:title>Worldcat</dc:title>';
-	$rdf .=         '<z:linkMode>3</z:linkMode>';
-	$rdf .=     '</z:Attachment>';
+	if ($identifier === 'isbn') {
+		$rdf .= '<z:Attachment rdf:about="#worldcat">';
+		$rdf .=     '<z:itemType>attachment</z:itemType>';
+		$rdf .=     '<dc:identifier>';
+		$rdf .=         '<dcterms:URI>';
+		$rdf .=             '<rdf:value>'.XMLClean($data->list[0]->url[0]).'</rdf:value>';
+		$rdf .=         '</dcterms:URI>';
+		$rdf .=     '</dc:identifier>';
+		$rdf .=     '<dc:title>Worldcat</dc:title>';
+		$rdf .=     '<z:linkMode>3</z:linkMode>';
+		$rdf .= '</z:Attachment>';
+	}
 	$rdf .= '</rdf:RDF>';
 	return $rdf;
 }
