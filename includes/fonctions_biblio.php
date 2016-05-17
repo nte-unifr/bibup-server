@@ -350,6 +350,12 @@ function rdf_from_json_data($data, $identifier) {
 	    $rdf .=     '<link:link rdf:resource="#file2"/>';
 	}
 	$rdf .=         '<link:link rdf:resource="#worldcat"/>';
+	if ($identifier === 'issn') {
+		$rdf .= '<bib:Journal rdf:about="urn:issn:'.$idnumber.'">';
+		$rdf .= 	'<dc:title>'.$title.'</dc:title>';
+		$rdf .= 	'<dc:identifier>ISSN '.$idnumber.'</dc:identifier>';
+		$rdf .= '</bib:Journal>';
+	}
 	$rdf .=         $resource;
 	if ($year != '') {
 		$rdf .=         '<dc:date>'.$year.'</dc:date>';
@@ -357,12 +363,6 @@ function rdf_from_json_data($data, $identifier) {
 	$rdf .=         '<z:libraryCatalog>elearning.unifr.ch</z:libraryCatalog>';
 	$rdf .=         '<dc:title>'.$title.'</dc:title>';
 	$rdf .=     '</bib:'.$type.'>';
-	if ($identifier === 'issn') {
-		$rdf .= '<bib:Journal rdf:about="urn:issn:'.$idnumber.'">';
-		$rdf .= 	'<dc:title>'.$title.'</dc:title>';
-		$rdf .= 	'<dc:identifier>ISSN '.$idnumber.'</dc:identifier>';
-		$rdf .= '</bib:Journal>';
-	}
 	if (!empty($_POST['note'])) {
 		$rdf .= '<bib:Memo rdf:about="#note">';
 		$rdf .=     '<rdf:value>'.XMLClean($_POST['note']).'</rdf:value>';
