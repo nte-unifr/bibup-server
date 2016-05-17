@@ -310,8 +310,8 @@ function rdf_from_json_data($data, $identifier) {
 		$text1 = $data->group[0]->text1;
 		$text2 = $data->group[0]->text2;
 		$title = XMLClean($data->group[0]->list[0]->title);
-		$resource = '<dcterms:isPartOf rdf:resource="urn:issn:'.$idnumber.'"/>';
-		$bib = '<bib:Article rdf:about="#'.$idnumber.'_part">';
+		$resource = '<dc:identifier>ISSN '.$idnumber.'</dc:identifier>';
+		$bib = '<bib:Article rdf:about="urn:'.$identifier.':'.$idnumber.'">';
 	}
 	$rdf = '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:z="http://www.zotero.org/namespaces/export#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:bib="http://purl.org/net/biblio#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:link="http://purl.org/rss/1.0/modules/link/">';
 	$rdf .=     $bib;
@@ -350,13 +350,7 @@ function rdf_from_json_data($data, $identifier) {
 	    $rdf .=     '<link:link rdf:resource="#file2"/>';
 	}
 	if ($identifier === 'isbn') {
-		$rdf .=         '<link:link rdf:resource="#worldcat"/>';
-	}
-	if ($identifier === 'issn') {
-		$rdf .= '<bib:Journal rdf:about="urn:issn:'.$idnumber.'">';
-		$rdf .= 	'<dc:title>'.$title.'</dc:title>';
-		$rdf .= 	'<dc:identifier>ISSN '.$idnumber.'</dc:identifier>';
-		$rdf .= '</bib:Journal>';
+		$rdf .=     '<link:link rdf:resource="#worldcat"/>';
 	}
 	$rdf .=         $resource;
 	if ($year != '') {
