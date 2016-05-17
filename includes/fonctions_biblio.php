@@ -349,7 +349,9 @@ function rdf_from_json_data($data, $identifier) {
 	if ($file2 <> '') {
 	    $rdf .=     '<link:link rdf:resource="#file2"/>';
 	}
-	$rdf .=         '<link:link rdf:resource="#worldcat"/>';
+	if ($identifier === 'isbn') {
+		$rdf .=         '<link:link rdf:resource="#worldcat"/>';
+	}
 	if ($identifier === 'issn') {
 		$rdf .= '<bib:Journal rdf:about="urn:issn:'.$idnumber.'">';
 		$rdf .= 	'<dc:title>'.$title.'</dc:title>';
