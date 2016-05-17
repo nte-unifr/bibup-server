@@ -301,8 +301,8 @@ function rdf_from_json_data($data, $identifier) {
 	else {
 		$type= 'Article';
 		$exType = 'journalArticle';
-		$publisher = XMLClean($data->list[0]->publisher);
-		$author = XMLClean($data->list[0]->author);
+		$publisher = XMLClean($data->group[0]->publisher);
+		$author = XMLClean($data->group[0]->author);
 		$idnumber = XMLClean($data->group[0]->list[0]->issn);
 		$year = XMLClean($data->list[0]->year);
 		$file1 = $data->group[0]->file1;
