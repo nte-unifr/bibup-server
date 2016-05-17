@@ -283,9 +283,9 @@ function mods_from_json_data_issn($data) {
 }
 
 function rdf_from_json_data($data, $identifier) {
-	if ($identifier === "isbn") {
-		$type = "Book";
-		$exType = "book";
+	if ($identifier === 'isbn') {
+		$type = 'Book';
+		$exType = 'book';
 		$publisher = XMLClean($data->list[0]->publisher);
 		$author = XMLClean($data->list[0]->author);
 		$idnumber = XMLClean($data->list[0]->isbn[0]);
@@ -295,10 +295,12 @@ function rdf_from_json_data($data, $identifier) {
 		$text1 = $data->list[0]->text1;
 		$text2 = $data->list[0]->text2;
 		$title = XMLClean($data->list[0]->title);
+		$resource = '<dc:identifier>ISBN '.$idnumber.'</dc:identifier>';
+		$bib = '<bib:'.$type.' rdf:about="urn:'.$identifier.':'.$idnumber.'">';
 	}
 	else {
-		$type= "Article";
-		$exType = "journalArticle";
+		$type= 'Article';
+		$exType = 'journalArticle';
 		$publisher = XMLClean($data->group[0]->list[0]->publisher);
 		$author = '';
 		$idnumber = XMLClean($data->group[0]->list[0]->issn);
@@ -308,9 +310,11 @@ function rdf_from_json_data($data, $identifier) {
 		$text1 = $data->group[0]->text1;
 		$text2 = $data->group[0]->text2;
 		$title = XMLClean($data->group[0]->list[0]->title);
+		$resource = '<dcterms:isPartOf rdf:resource="urn:issn:'.$idnumber.'"/>';
+		$bib = '<bib:Article>';
 	}
 	$rdf = '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:z="http://www.zotero.org/namespaces/export#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:bib="http://purl.org/net/biblio#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:link="http://purl.org/rss/1.0/modules/link/">';
-	$rdf .=     '<bib:'.$type.' rdf:about="urn:'.$identifier.':'.$idnumber.'">';
+	$rdf .=     $bib;
 	$rdf .=         '<z:itemType>'.$exType.'</z:itemType>';
 	if ($publisher != '') {
 		$rdf .=     '<dc:publisher>';
@@ -346,13 +350,19 @@ function rdf_from_json_data($data, $identifier) {
 	    $rdf .=     '<link:link rdf:resource="#file2"/>';
 	}
 	$rdf .=         '<link:link rdf:resource="#worldcat"/>';
-	$rdf .=         '<dc:identifier>'.strtoupper($identifier).' '.$idnumber.'</dc:identifier>';
+	$rdf .=         $resource;
 	if ($year != '') {
 		$rdf .=         '<dc:date>'.$year.'</dc:date>';
 	}
 	$rdf .=         '<z:libraryCatalog>elearning.unifr.ch</z:libraryCatalog>';
 	$rdf .=         '<dc:title>'.$title.'</dc:title>';
 	$rdf .=     '</bib:'.$type.'>';
+	if ($identifier === 'issn') {
+		$rdf .= '<bib:Journal rdf:about="urn:issn:'.$idnumber.'">';
+		$rdf .= 	'<dc:title>'.$title.'</dc:title>';
+		$rdf .= 	'<dc:identifier>ISSN '.$idnumber.'</dc:identifier>';
+		$rdf .= '</bib:Journal>';
+	}
 	if (!empty($_POST['note'])) {
 		$rdf .= '<bib:Memo rdf:about="#note">';
 		$rdf .=     '<rdf:value>'.XMLClean($_POST['note']).'</rdf:value>';
