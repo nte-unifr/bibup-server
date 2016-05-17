@@ -347,7 +347,9 @@ function rdf_from_json_data($data, $identifier) {
 	}
 	$rdf .=         '<link:link rdf:resource="#worldcat"/>';
 	$rdf .=         '<dc:identifier>'.strtoupper($identifier).' '.$idnumber.'</dc:identifier>';
-	$rdf .=         '<dc:date>'.$year.'</dc:date>';
+	if ($year != '') {
+		$rdf .=         '<dc:date>'.$year.'</dc:date>';
+	}
 	$rdf .=         '<z:libraryCatalog>elearning.unifr.ch</z:libraryCatalog>';
 	$rdf .=         '<dc:title>'.$title.'</dc:title>';
 	$rdf .=     '</bib:'.$type.'>';
