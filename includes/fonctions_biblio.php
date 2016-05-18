@@ -286,40 +286,32 @@ function rdf_from_json_data($data, $identifier) {
 	if ($identifier === 'isbn') {
 		$type = 'Book';
 		$exType = 'book';
-		$publisher = XMLClean($data->list[0]->publisher);
-		$author = XMLClean($data->list[0]->author);
+		$list = $data->list[0];
 		$idnumber = XMLClean($data->list[0]->isbn[0]);
 		$year = XMLClean($data->list[0]->year);
 		$file1 = $data->list[0]->file1;
 		$file2 = $data->list[0]->file2;
 		$text1 = $data->list[0]->text1;
 		$text2 = $data->list[0]->text2;
-		$title = XMLClean($data->list[0]->title);
-		$resource = '<dc:identifier>ISBN '.$idnumber.'</dc:identifier>';
-		$bib = '<bib:Book rdf:about="urn:'.$identifier.':'.$idnumber.'">';
 	}
 	else {
 		$type= 'Article';
 		$exType = 'journalArticle';
-		$publisher = XMLClean($data->group[0]->list[0]->publisher);
-		$author = XMLClean($data->group[0]->list[0]->author);
+		$list = $data->group[0]->list[0];
 		$idnumber = XMLClean($data->group[0]->list[0]->issn);
-		$year = XMLClean($data->list[0]->year);
+		$year = XMLClean($data->list[0]->rawcoverage);
 		$file1 = $data->group[0]->file1;
 		$file2 = $data->group[0]->file2;
 		$text1 = $data->group[0]->text1;
 		$text2 = $data->group[0]->text2;
-		$title = XMLClean($data->group[0]->list[0]->title);
-		$resource = '<dc:identifier>ISSN '.$idnumber.'</dc:identifier>';
-		$bib = '<bib:Article rdf:about="urn:'.$identifier.':'.$idnumber.'">';
 	}
 	$rdf = '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:z="http://www.zotero.org/namespaces/export#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:bib="http://purl.org/net/biblio#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:link="http://purl.org/rss/1.0/modules/link/">';
-	$rdf .=     $bib;
+	$rdf .=     '<bib:'.$type.' rdf:about="urn:'.$identifier.':'.$idnumber.'">';
 	$rdf .=         '<z:itemType>'.$exType.'</z:itemType>';
 	if ($publisher != '') {
 		$rdf .=     '<dc:publisher>';
 		$rdf .=         '<foaf:Organization>';
-		$rdf .=             '<foaf:name>'.$publisher.'</foaf:name>';
+		$rdf .=             '<foaf:name>'.XMLClean($list->publisher);.'</foaf:name>';
 		$rdf .=         '</foaf:Organization>';
 		$rdf .=     '</dc:publisher>';
 	}
@@ -328,7 +320,7 @@ function rdf_from_json_data($data, $identifier) {
 		$rdf .=         '<rdf:Seq>';
 		$rdf .=             '<rdf:li>';
 		$rdf .=                 '<foaf:Person>';
-		$rdf .=                     '<foaf:surname>'.$author.'</foaf:surname>';
+		$rdf .=                     '<foaf:surname>'.XMLClean($list->author).'</foaf:surname>';
 		$rdf .=                 '</foaf:Person>';
 		$rdf .=             '</rdf:li>';
 		$rdf .=         '</rdf:Seq>';
@@ -352,12 +344,12 @@ function rdf_from_json_data($data, $identifier) {
 	if ($identifier === 'isbn') {
 		$rdf .=     '<link:link rdf:resource="#worldcat"/>';
 	}
-	$rdf .=         $resource;
+	$rdf .=         '<dc:identifier>'.strtoupper($identifier).' '.$idnumber.'</dc:identifier>';
 	if ($year != '') {
 		$rdf .=         '<dc:date>'.$year.'</dc:date>';
 	}
 	$rdf .=         '<z:libraryCatalog>elearning.unifr.ch</z:libraryCatalog>';
-	$rdf .=         '<dc:title>'.$title.'</dc:title>';
+	$rdf .=         '<dc:title>'.XMLClean($list->title);.'</dc:title>';
 	$rdf .=     '</bib:'.$type.'>';
 	if (!empty($_POST['note'])) {
 		$rdf .= '<bib:Memo rdf:about="#note">';
