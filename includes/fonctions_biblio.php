@@ -287,8 +287,8 @@ function rdf_from_json_data($data, $identifier) {
 		$type = 'Book';
 		$exType = 'book';
 		$list = $data->list[0];
-		$idnumber = XMLClean($data->list[0]->isbn[0]);
-		$year = XMLClean($data->list[0]->year);
+		$idnumber = XMLClean($list->isbn[0]);
+		$year = XMLClean($list->year);
 		$file1 = $data->list[0]->file1;
 		$file2 = $data->list[0]->file2;
 		$text1 = $data->list[0]->text1;
@@ -298,8 +298,8 @@ function rdf_from_json_data($data, $identifier) {
 		$type= 'Article';
 		$exType = 'journalArticle';
 		$list = $data->group[0]->list[0];
-		$idnumber = XMLClean($data->group[0]->list[0]->issn);
-		$year = XMLClean($data->list[0]->rawcoverage);
+		$idnumber = XMLClean($list->issn);
+		$year = XMLClean($list->rawcoverage);
 		$file1 = $data->group[0]->file1;
 		$file2 = $data->group[0]->file2;
 		$text1 = $data->group[0]->text1;
@@ -311,7 +311,7 @@ function rdf_from_json_data($data, $identifier) {
 	if ($publisher != '') {
 		$rdf .=     '<dc:publisher>';
 		$rdf .=         '<foaf:Organization>';
-		$rdf .=             '<foaf:name>'.XMLClean($list->publisher);.'</foaf:name>';
+		$rdf .=             '<foaf:name>'.XMLClean($list->publisher).'</foaf:name>';
 		$rdf .=         '</foaf:Organization>';
 		$rdf .=     '</dc:publisher>';
 	}
@@ -349,7 +349,7 @@ function rdf_from_json_data($data, $identifier) {
 		$rdf .=         '<dc:date>'.$year.'</dc:date>';
 	}
 	$rdf .=         '<z:libraryCatalog>elearning.unifr.ch</z:libraryCatalog>';
-	$rdf .=         '<dc:title>'.XMLClean($list->title);.'</dc:title>';
+	$rdf .=         '<dc:title>'.XMLClean($list->title).'</dc:title>';
 	$rdf .=     '</bib:'.$type.'>';
 	if (!empty($_POST['note'])) {
 		$rdf .= '<bib:Memo rdf:about="#note">';
@@ -397,7 +397,7 @@ function rdf_from_json_data($data, $identifier) {
 		$rdf .=     '<z:itemType>attachment</z:itemType>';
 		$rdf .=     '<dc:identifier>';
 		$rdf .=         '<dcterms:URI>';
-		$rdf .=             '<rdf:value>'.XMLClean($data->list[0]->url[0]).'</rdf:value>';
+		$rdf .=             '<rdf:value>'.XMLClean($list->url[0]).'</rdf:value>';
 		$rdf .=         '</dcterms:URI>';
 		$rdf .=     '</dc:identifier>';
 		$rdf .=     '<dc:title>Worldcat</dc:title>';
