@@ -124,8 +124,8 @@ $tagOnFocus = '';
 			<div class="col-md-3">
                 <div class="text-center">
                     <img class="app-icon" src="dist/images/bibupAppIcon.png" />
-                    <a href="https://itunes.apple.com/app/bibup-universite-de-fribourg/id418304170?mt=8#" target="_blank"><img class="store-brand" src="dist/images/appstore.svg" /></a>
-                    <a href="https://play.google.com/store/apps/details?id=ch.unifr.nte.bibup&hl=en" target="_blank"><img class="store-brand" src="dist/images/googleplay.png" /></a>
+                    <a href="https://itunes.apple.com/app/bibup-universite-de-fribourg/id418304170?mt=8#"><img class="store-brand" src="dist/images/appstore.svg" /></a>
+                    <a href="https://play.google.com/store/apps/details?id=ch.unifr.nte.bibup&hl=en"><img class="store-brand" src="dist/images/googleplay.png" /></a>
 		</div>
                 <div class="spacer"></div>
 				<div class="well">
