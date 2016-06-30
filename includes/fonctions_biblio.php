@@ -308,14 +308,14 @@ function rdf_from_json_data($data, $identifier) {
 	$rdf = '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:z="http://www.zotero.org/namespaces/export#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:bib="http://purl.org/net/biblio#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:link="http://purl.org/rss/1.0/modules/link/">';
 	$rdf .=     '<bib:'.$type.' rdf:about="urn:'.$identifier.':'.$idnumber.'">';
 	$rdf .=         '<z:itemType>'.$exType.'</z:itemType>';
-	if ($list->$publisher != '') {
+	if ($list->publisher != '') {
 		$rdf .=     '<dc:publisher>';
 		$rdf .=         '<foaf:Organization>';
 		$rdf .=             '<foaf:name>'.XMLClean($list->publisher).'</foaf:name>';
 		$rdf .=         '</foaf:Organization>';
 		$rdf .=     '</dc:publisher>';
 	}
-	if ($list->$author != '') {
+	if ($list->author != '') {
 		$rdf .=     '<bib:authors>';
 		$rdf .=         '<rdf:Seq>';
 		$rdf .=             '<rdf:li>';
