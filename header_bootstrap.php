@@ -11,7 +11,7 @@
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
 	<!-- Open Sans from Google fonts -->
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700,300,600,800,400' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,700,300,600,800,400' rel='stylesheet' type='text/css'>
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="dist/css/bootstrap.min.css" />
