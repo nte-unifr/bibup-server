@@ -320,8 +320,8 @@ function rdf_from_json_data($data, $identifier) {
 		$rdf .=         '<rdf:Seq>';
 		$rdf .=             '<rdf:li>';
 		$rdf .=                 '<foaf:Person>';
-		$rdf .=                     '<foaf:surname>'.XMLClean($list->author).'</foaf:surname>';
-        $rdf .=                     '<foaf:givenname></foaf:givenname>';
+		$rdf .=                     '<foaf:surname>temp</foaf:surname>';
+        $rdf .=                     '<foaf:givenname>name</foaf:givenname>';
 		$rdf .=                 '</foaf:Person>';
 		$rdf .=             '</rdf:li>';
 		$rdf .=         '</rdf:Seq>';
