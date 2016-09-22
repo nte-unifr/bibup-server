@@ -9,3 +9,4 @@
 /config/deploy.rb
 /lib/capistrano/*
 /.bundle/*
+.DS_Store
