@@ -299,8 +299,7 @@ include("header_bootstrap.php");
 		</div>
 		<div class="teamMemberRight">
 			<p>To get the references, you need to use the web browser <a href="http://www.mozilla.com/en-US/firefox/">Firefox</a> and the bibliographic manager add-on <a href="http://zotero.org">Zotero</a>.</p>
-			<p>Zotero also works with Google Chrome, Safari and Opera. In order to use Zotero with these web browsers you need to install the Standalone version of Zotero in addition to the plugin (<a href="https://www.zotero.org/support/installation">read this page</a> for more details).</p>
-            <p><a href="#" title="Read more" class="toggler">More &raquo;</a></p>
+			<p><a href="#" title="Read more" class="toggler">More &raquo;</a></p>
             <div class="toggleMe">
                 <p>To control if Zotero is installed on your Firefox web browser, either go to <em>Tools > Add-ons</em>, and Zotero should be listed in the Extensions tab, or a "Z" in dark gray should be visible in the upper right of your web browser.</p>
                 <p>When you click it, Zotero opens up in the lower part of the Firefox window.</p>
