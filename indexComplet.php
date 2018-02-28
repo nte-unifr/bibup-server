@@ -15,7 +15,7 @@ if (!isset($_GET['filter'])) {
     $theTag = "";
     $sqlTag = "tag = 'nte'";
 } else if (isset($_GET['filter']) && ($_GET['tag']!= '')) {
-    $theTag = mysql_real_escape_string($_GET['tag']);
+    $theTag = $connexion1->real_escape_string($_GET['tag']);
     $sqlTag = "tag = '" . $theTag . "' and datecreated > '$formatedLimitDate' and OCRtodo = false order by datecreated desc";
     //$sqlTag = "tag = '" . $theTag . "' and datecreated > '$formatedLimitDate' order by datecreated desc";
 } else {
@@ -52,8 +52,8 @@ $sqlTag = '1=1';
 
                 <?php
         			$requete = "select * from fiches where " . $sqlTag;
-        			$result = mysql_query($requete) or die("<br />couldn't execute query");
-                    if (mysql_num_rows($result) > 0) {
+        			$result = $connexion1->query($requete) or die("<br />couldn't execute query");
+                    if ($connexion1->num_rows($result) > 0) {
                         echo '<table class="table table-responsive tablesorter">
         						<thead>
         							<tr>
@@ -65,7 +65,7 @@ $sqlTag = '1=1';
         						</thead>
         						<tbody>';
 
-        				while($row = mysql_fetch_array($result))
+        				while($row = $result->fetch_array())
                         {
                         	echo "<tr>";
                             echo"<td>";

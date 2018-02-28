@@ -20,8 +20,8 @@ if ( $id ) {
 		unapi_error(404);
 	}
 	$requete = "select * from fiches where id = " . ($id);
-	$result = mysql_query($requete) or die("<br />couldn't execute query");
-	$row = mysql_fetch_assoc($result);
+	$result = $connexion1->query($requete) or die("<br />couldn't execute query");
+	$row = $connexion1->fetch_assoc($result);
 	if (!$row) {
 		unapi_error(404);
 	}

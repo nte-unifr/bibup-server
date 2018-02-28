@@ -9,8 +9,8 @@ if (!file_exists($running_ocr)) {
 	touch($running_ocr);
 	$query = "select * from fiches where OCRtodo = TRUE";
 //	echo $query;
-	$result = mysql_query($query) or die("<br />couldn't execute query");
-	while($row = mysql_fetch_array($result))
+	$result = $connexion1->query($query) or die("<br />couldn't execute query");
+	while($row = $result->fetch_array())
 	{
 		$contentOCR = "";
 		$titleOCR = "";
@@ -43,7 +43,7 @@ if (!file_exists($running_ocr)) {
 		$query .= ", rdf = '" . addslashes($rdf) . "'";
 		$query .= ", mods = '" . addslashes($mods) . "' where id =" . $row["id"];
 //		echo $query . "</br>";
-		$result1 = mysql_query($query) or die("<br />couldn't execute query");
+		$result1 = $connexion1->query($query) or die("<br />couldn't execute query");
 	}
 	unlink($running_ocr);
 } else {

@@ -294,38 +294,38 @@ if (isset($_POST['isbn'])) {
 	}
 
     $isbn = ($_POST['isbn']);
-    if ($_POST['uid'] == NULL || !isset($_POST['uid'])) {
+    if (!isset($_POST['uid']) || $_POST['uid'] == NULL) {
         if ((substr($isbn,0,3) == "978") || (strlen($isbn) == 10)) {
     		$data = json_data_from_isbn($isbn);
     		if ($data->stat == 'ok') {
     			$fiche['ip'] = $_SERVER['REMOTE_ADDR'];
-    			$fiche['title'] = mysql_real_escape_string($data->list[0]->title);
+    			$fiche['title'] = $connexion1->real_escape_string($data->list[0]->title);
     			$fiche['isbn'] = $data->list[0]->isbn[0];
-    			$fiche['auteur'] = mysql_real_escape_string($data->list[0]->author);
+    			$fiche['auteur'] = $connexion1->real_escape_string($data->list[0]->author);
     	//		$fiche['coin'] = coin_from_data($data);
     			$data->list[0]->file1 = $file1;
     			$data->list[0]->file2 = $file2;
     			$data->list[0]->text1 = $text1;
     			$data->list[0]->text2 = $text2;
     //			$data->list[0]->file1 = $file1;
-    			$fiche['mods'] = mysql_real_escape_string(mods_from_json_data_isbn($data));
-                $fiche['rdf'] = mysql_real_escape_string(rdf_from_json_data($data, 'isbn'));
+    			$fiche['mods'] = $connexion1->real_escape_string(mods_from_json_data_isbn($data));
+                $fiche['rdf'] = $connexion1->real_escape_string(rdf_from_json_data($data, 'isbn'));
     			$fiche['contentSnapshot'] = $file1;
     			$fiche['textOCR'] = addslashes($text1);
     			$fiche['titleSnapshot'] = $file2;
     			$fiche['titleOCR'] = addslashes($text2);
     			$fiche['OCRtodo'] = $OCRtodo;
     			if (!empty($_POST['tag'])) {
-    				$fiche['tag'] = mysql_real_escape_string($_POST['tag']);
+    				$fiche['tag'] = $connexion1->real_escape_string($_POST['tag']);
     			};
     			$query = sql_insert('fiches',$fiche);
     //			echo $query;
-    			$result = mysql_query($query);
-    			$insert_id = mysql_insert_id();
+    			$result = $connexion1->query($query);
+    			$insert_id = $connexion1->insert_id;
     			if ($result) {
     				echo trim("##ok##".$insert_id);
     			} else {
-    				echo "Problème lors de l'ajout de la fiche";
+					echo "Problème lors de l'ajout de la fiche";
     			}
     		} else {
     			echo 'isbn not found';
@@ -335,27 +335,27 @@ if (isset($_POST['isbn'])) {
 
     		if ($data->stat == 'ok') {
     			$fiche['ip'] = $_SERVER['REMOTE_ADDR'];
-    			$fiche['title'] = mysql_real_escape_string($data->group[0]->list[0]->title);
+    			$fiche['title'] = $connexion1->real_escape_string($data->group[0]->list[0]->title);
     			$fiche['isbn'] = $isbn;
     //			$fiche['auteur'] = '';
     			$data->group[0]->file1 = $file1;
     			$data->group[0]->file2 = $file2;
     			$data->group[0]->text1 = $text1;
     			$data->group[0]->text2 = $text2;
-    			$fiche['mods'] = mysql_real_escape_string(mods_from_json_data_issn($data));
-                $fiche['rdf'] = mysql_real_escape_string(rdf_from_json_data($data, 'issn'));
+    			$fiche['mods'] = $connexion1->real_escape_string(mods_from_json_data_issn($data));
+                $fiche['rdf'] = $connexion1->real_escape_string(rdf_from_json_data($data, 'issn'));
     			$fiche['contentSnapshot'] = $file1;
     			$fiche['textOCR'] = addslashes($text1);
     			$fiche['titleSnapshot'] = $file2;
     			$fiche['titleOCR'] = addslashes($text2);
     			$fiche['OCRtodo'] = $OCRtodo;
     			if (!empty($_POST['tag'])) {
-    				$fiche['tag'] = mysql_real_escape_string($_POST['tag']);
+    				$fiche['tag'] = $connexion1->real_escape_string($_POST['tag']);
     			};
     			$query = sql_insert('fiches',$fiche);
     //			echo $query;
-    			$result = mysql_query($query);
-    			$insert_id = mysql_insert_id();
+    			$result = $connexion1->query($query);
+    			$insert_id = $connexion1->insert_id;
     			if ($result) {
     				echo trim("##ok##".$insert_id);
     			} else {
@@ -370,21 +370,21 @@ if (isset($_POST['isbn'])) {
         if ((substr($isbn,0,3) == "978") || (strlen($isbn) == 10)) {
     		$data = json_data_from_isbn($isbn);
     		if ($data->stat == 'ok') {
-                $res = mysql_query("SELECT contentSnapshot FROM fiches WHERE id = " . $up_id);
-    			$data->list[0]->file1 = mysql_result($res, 0);//$file1; //get from db
+                $res = $connexion1->query("SELECT contentSnapshot FROM fiches WHERE id = " . $up_id);
+    			$data->list[0]->file1 = $connexion1->result($res, 0);//$file1; //get from db
     			$data->list[0]->file2 = $file2;
-                $res = mysql_query("SELECT textOCR FROM fiches WHERE id = " . $up_id);
-    			$data->list[0]->text1 = mysql_result($res, 0);//$text1; //get from db
+                $res = $connexion1->query("SELECT textOCR FROM fiches WHERE id = " . $up_id);
+    			$data->list[0]->text1 = $connexion1->result($res, 0);//$text1; //get from db
     			$data->list[0]->text2 = $text2;
-    			$fiche['mods'] = mysql_real_escape_string(mods_from_json_data_isbn($data));
-                $fiche['rdf'] = mysql_real_escape_string(rdf_from_json_data($data, 'isbn'));
+    			$fiche['mods'] = $connexion1->real_escape_string(mods_from_json_data_isbn($data));
+                $fiche['rdf'] = $connexion1->real_escape_string(rdf_from_json_data($data, 'isbn'));
     			$fiche['titleSnapshot'] = $file2;
     			$fiche['titleOCR'] = addslashes($text2);
                 if ($OCRtodo == true) {
                     $fiche['OCRtodo'] = $OCRtodo;
                 }
     			$query = sql_update('fiches',$fiche,true, $up_id);
-    			$result = mysql_query($query);
+    			$result = $connexion1->query($query);
     			if ($result) {
     				echo trim("##okup##".$up_id);
     			} else {
@@ -397,21 +397,21 @@ if (isset($_POST['isbn'])) {
     		$data = json_data_from_issn($isbn);
 
     		if ($data->stat == 'ok') {
-                $res = mysql_query("SELECT contentSnapshot FROM fiches WHERE id = " . $up_id);
-    			$data->group[0]->file1 = mysql_result($res, 0);//$file1; //get from db
+                $res = $connexion1->query("SELECT contentSnapshot FROM fiches WHERE id = " . $up_id);
+    			$data->group[0]->file1 = $connexion1->result($res, 0);//$file1; //get from db
     			$data->group[0]->file2 = $file2;
-                $res = mysql_query("SELECT textOCR FROM fiches WHERE id = " . $up_id);
-    			$data->group[0]->text1 = mysql_result($res, 0);//$text1; //get from db
+                $res = $connexion1->query("SELECT textOCR FROM fiches WHERE id = " . $up_id);
+    			$data->group[0]->text1 = $connexion1->result($res, 0);//$text1; //get from db
     			$data->group[0]->text2 = $text2;
-    			$fiche['mods'] = mysql_real_escape_string(mods_from_json_data_issn($data));
-                $fiche['rdf'] = mysql_real_escape_string(rdf_from_json_data($data, 'issn'));
+    			$fiche['mods'] = $connexion1->real_escape_string(mods_from_json_data_issn($data));
+                $fiche['rdf'] = $connexion1->real_escape_string(rdf_from_json_data($data, 'issn'));
     			$fiche['titleSnapshot'] = $file2;
     			$fiche['titleOCR'] = addslashes($text2);
                 if ($OCRtodo == true) {
                     $fiche['OCRtodo'] = $OCRtodo;
                 }
     			$query = sql_update('fiches',$fiche, true, $up_id);
-                $result = mysql_query($query);
+                $result = $connexion1->query($query);
     			if ($result) {
     				echo trim("##okup##".$up_id);
     			} else {

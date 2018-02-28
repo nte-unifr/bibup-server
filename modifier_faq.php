@@ -4,10 +4,10 @@
 	include("includes/fonctions.inc");
 	include("header_bootstrap.php");
 	$query = "SELECT * FROM $bibup_faq";
-	$result = mysql_query($query);
+	$result = $connexion1->query($query);
 
 	if(isset($_GET['action']))
-		$action = mysql_real_escape_string($_GET['action']);
+		$action = $connexion1->real_escape_string($_GET['action']);
 	else
 		$action = '';
 
@@ -103,7 +103,7 @@
 			<div class="ficheTable" id="topicList">
 				<?php
 					$i = 1;
-					while($row = mysql_fetch_array($result)){
+					while($row = $result->fetch_array()){
 						echo '<div id="topic' . $i . '" class="entry">
 							<div class="form-group">
 								<label for="title' . $i . '"><img class="buttonImage" src="images/micro_delete.png" id="image'. $i . '" onclick="deleteTopic(\'topic' . $i . '\');"> Title </label>

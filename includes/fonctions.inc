@@ -139,10 +139,10 @@ function addTopics($post){
 			}
 		}
 	}
-	mysql_query("TRUNCATE " .  $bibup_faq) or die (mysql_error()."<br />couldn't execute query: $query");
+	$connexion1->query("TRUNCATE " .  $bibup_faq) or die ($connexion1->error()."<br />couldn't execute query: $query");
 	if ($sql != ''){
 		$sql = "INSERT INTO ". $bibup_faq . " (`id`, `title`, `description`) VALUES " . $sql . ";";
-		$result = mysql_query($sql) or die (mysql_error()."<br />couldn't execute query: $query");
+		$result = $connexion1->query($sql) or die ($connexion1->error()."<br />couldn't execute query: $query");
 	}
 }
 
@@ -282,11 +282,11 @@ function read_file($filename) {
 function getFields($table,$database="")
 {
 	if (!$database) $database=$GLOBALS['currentdb'];
-	$fields = mysql_list_fields($database,$GLOBALS[tp].$table) or die (mysql_error());
-	$columns = mysql_num_fields($fields);
+	$fields = $connexion1->list_fields($database,$GLOBALS[tp].$table) or die ($connexion1->error());
+	$columns = $connexion1->num_fields($fields);
 	$arr=array();
 	for ($i = 0; $i < $columns; $i++) {
-		$fieldname=mysql_field_name($fields, $i);
+		$fieldname=$connexion1->field_name($fields, $i);
 		$arr[$fieldname]=1;
 	}
 	return $arr;
@@ -294,11 +294,11 @@ function getFields($table,$database="")
 
 function getFieldList($DB, $Table) {
 
-	$fldlist = mysql_list_fields($DB, $Table);
-	$columns = mysql_num_fields($fldlist);
+	$fldlist = $connexion1->list_fields($DB, $Table);
+	$columns = $connexion1->num_fields($fldlist);
 
 	for ($i = 0; $i < $columns; $i++) {
-		$Listing[] = mysql_field_name($fldlist, $i);
+		$Listing[] = $connexion1->field_name($fldlist, $i);
 	}
 
 	return ($Listing);

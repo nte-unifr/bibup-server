@@ -4,8 +4,8 @@ session_start();
 include("includes/fonctions.inc");
 include("header_bootstrap.php");
 
-$username=mysql_real_escape_string($_POST['username']);
-$password=md5(mysql_real_escape_string($_POST['password']));
+$username=$connexion1->real_escape_string($_POST['username']);
+$password=md5($connexion1->real_escape_string($_POST['password']));
 ?>
 
 <div class="row">
@@ -25,8 +25,8 @@ $password=md5(mysql_real_escape_string($_POST['password']));
 				{
 					$query = "select * from users where userName='$username' and password='$password'";
 					//exécution de la requête
-					$result = mysql_query($query);
-					$data = mysql_fetch_array($result);
+					$result = $connexion1->query($query);
+					$data = $result->fetch_array();
 					if($data['password'] != $password)
 					{
 						echo "<div class=\"alert alert-danger\" role=\"alert\">Wrong login / password.</div>";

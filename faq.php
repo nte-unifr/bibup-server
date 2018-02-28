@@ -5,7 +5,7 @@
     include("header_bootstrap.php");
 
     $query = "SELECT * FROM $bibup_faq";
-    $result = mysql_query($query);
+    $result = $connexion1->query($query);
 ?>
 
 <div class="row">
@@ -24,7 +24,7 @@
 		</div>
 
         <?php
-            while($row = mysql_fetch_array($result))
+            while($row = $result->fetch_array())
             {
                 echo '<div class="panel panel-default">
                         <div class="panel-heading"><strong>';

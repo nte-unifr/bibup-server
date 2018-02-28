@@ -1,5 +1,4 @@
 /uploads/*
-/connect.php
 
 # Capistrano
 /Capfile
