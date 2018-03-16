@@ -21,7 +21,7 @@ if ( $id ) {
 	}
 	$requete = "select * from fiches where id = " . ($id);
 	$result = $connexion1->query($requete) or die("<br />couldn't execute query");
-	$row = $connexion1->fetch_assoc($result);
+	$row = mysqli_fetch_assoc($result);
 	if (!$row) {
 		unapi_error(404);
 	}
