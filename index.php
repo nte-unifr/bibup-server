@@ -27,6 +27,7 @@ $tagOnFocus = '';
 
 <div class="row">
 	<div class="col-xs-12">
+		<div class="alert alert-warning" role="alert">The Bibup <strong>iOS and Android apps</strong> are temporarily <strong>unavailable</strong>. You can still check your existing references.</div>
 		<div class="page-header">
 			<h1>References</h1>
 		</div>
@@ -124,8 +125,8 @@ $tagOnFocus = '';
 			<div class="col-md-3">
                 <div class="text-center">
                     <img class="app-icon" src="dist/images/bibupAppIcon.png" />
-                    <a href="https://itunes.apple.com/app/bibup-universite-de-fribourg/id418304170?mt=8#"><img class="store-brand" src="dist/images/appstore.svg" /></a>
-                    <a href="https://play.google.com/store/apps/details?id=ch.unifr.nte.bibup&hl=en"><img class="store-brand" src="dist/images/googleplay.png" /></a>
+                    <!-- <a href="https://itunes.apple.com/app/bibup-universite-de-fribourg/id418304170?mt=8#"><img class="store-brand" src="dist/images/appstore.svg" /></a> -->
+                    <!-- <a href="https://play.google.com/store/apps/details?id=ch.unifr.nte.bibup&hl=en"><img class="store-brand" src="dist/images/googleplay.png" /></a> -->
 		</div>
                 <div class="spacer"></div>
 				<div class="well">

@@ -92,9 +92,9 @@
 									}
 								?>
                                 <li <?php echo $m1 ?>><a href="index.php">References</a></li>
-                                <li <?php echo $m2 ?>><a href="tutorial.php">Tutorial</a></li>
-                                <li <?php echo $m3 ?>><a href="faq.php">FAQ</a></li>
-                                <li><a href="https://survey.unifr.ch/index.php/95831?lang=en" target="_blank">Feedback</a></li>
+                                <!-- <li <?php echo $m2 ?>><a href="tutorial.php">Tutorial</a></li> -->
+                                <!-- <li <?php echo $m3 ?>><a href="faq.php">FAQ</a></li> -->
+                                <!-- <li><a href="https://survey.unifr.ch/index.php/95831?lang=en" target="_blank">Feedback</a></li> -->
 								<?php
 								if (isset($_SESSION['password'])) {
 									echo '<li><a href="logout.php">Logout</a></li>';
